@@ -1,0 +1,331 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Orders",
+    "description" : "Manage your orders here",
+    "version" : "alpha"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/SmartBear-CC/MyFirstAPI/alpha",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "security" : [ {
+    "basicAuth" : [ ]
+  } ],
+  "tags" : [ {
+    "name" : "orders",
+    "description" : "Everything about your Orders",
+    "externalDocs" : {
+      "description" : "Find out more",
+      "url" : "http://swagger.io"
+    }
+  } ],
+  "paths" : {
+    "/orders" : {
+      "post" : {
+        "tags" : [ "orders" ],
+        "summary" : "Add a new order in the DB",
+        "operationId" : "addOrder",
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Order"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Sucsessful operation"
+          },
+          "401" : {
+            "description" : "Authentication information is missing or invalid",
+            "headers" : {
+              "WWW_Authenticate" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/orders/{orderID}" : {
+      "get" : {
+        "tags" : [ "orders" ],
+        "summary" : "Find order by ID",
+        "description" : "Returns a single order",
+        "operationId" : "getorderById",
+        "parameters" : [ {
+          "name" : "orderID",
+          "in" : "path",
+          "description" : "ID of order to return",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Order"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "401" : {
+            "description" : "Authentication information is missing or invalid",
+            "headers" : {
+              "WWW_Authenticate" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Order not found"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "orders" ],
+        "summary" : "Update an existing order",
+        "operationId" : "updateOrder",
+        "parameters" : [ {
+          "name" : "orderID",
+          "in" : "path",
+          "description" : "ID of order to return",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "requestBody" : {
+          "$ref" : "#/components/requestBodies/Order"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Sucsessful operation"
+          },
+          "400" : {
+            "description" : "Server doesn't respond"
+          },
+          "401" : {
+            "description" : "Authentication information is missing or invalid",
+            "headers" : {
+              "WWW_Authenticate" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Order not found"
+          },
+          "405" : {
+            "description" : "Validation exception"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "orders" ],
+        "summary" : "Deletes an order",
+        "operationId" : "deleteOrder",
+        "parameters" : [ {
+          "name" : "orderID",
+          "in" : "path",
+          "description" : "Order ID to delete",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Sucsessful operation"
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "401" : {
+            "description" : "Authentication information is missing or invalid",
+            "headers" : {
+              "WWW_Authenticate" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Pet not found"
+          }
+        }
+      }
+    },
+    "/orders/all" : {
+      "get" : {
+        "tags" : [ "orders" ],
+        "summary" : "Returns a list of all orders",
+        "description" : "Returns a list of all orders",
+        "operationId" : "getInventory",
+        "responses" : {
+          "200" : {
+            "description" : "A list of all orders",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Order_array"
+                }
+              },
+              "application/xml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Order_array"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Invalid ID supplied"
+          },
+          "401" : {
+            "description" : "Authentication information is missing or invalid",
+            "headers" : {
+              "WWW_Authenticate" : {
+                "style" : "simple",
+                "explode" : false,
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Order not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Order" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "zipCode" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "cost" : {
+            "type" : "integer",
+            "format" : "double"
+          },
+          "adress" : {
+            "type" : "string"
+          },
+          "customerName" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Order Status",
+            "enum" : [ "placed", "approved", "delivered" ]
+          },
+          "complete" : {
+            "type" : "boolean",
+            "default" : false
+          }
+        },
+        "example" : {
+          "id" : 10,
+          "zipCode" : 300044,
+          "cost" : 500,
+          "customerName" : "Jessica Smith",
+          "adress" : "Russia, Moscow, 6 Lenin st.",
+          "status" : "approved",
+          "complete" : false
+        },
+        "xml" : {
+          "name" : "Order"
+        }
+      },
+      "Order_array" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Order"
+        }
+      }
+    },
+    "responses" : {
+      "UnauthorizedError" : {
+        "description" : "Authentication information is missing or invalid",
+        "headers" : {
+          "WWW_Authenticate" : {
+            "style" : "simple",
+            "explode" : false,
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies" : {
+      "Order" : {
+        "description" : "Order object that needs to be added to the store",
+        "content" : {
+          "application/json" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Order"
+            }
+          },
+          "application/xml" : {
+            "schema" : {
+              "$ref" : "#/components/schemas/Order"
+            }
+          }
+        },
+        "required" : true
+      }
+    },
+    "securitySchemes" : {
+      "basicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
