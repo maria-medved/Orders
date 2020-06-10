@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Orders>
+   <order1>
+      <id>123</id>
+      <zipCode>300062</zipCode>
+      <cost>356.99</cost>
+	  <adress>Moscow, 40 Lenin st.</adress>
+	  <customerName>Nicolas Wide</customerName>
+	  <status>approved</status>
+	  <complete>false</complete>
+   </order1>
+</Orders>
